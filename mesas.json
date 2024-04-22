@@ -1,0 +1,51 @@
+{
+    "mesa_1" : {
+        "disponibilidad": "ocupada", 
+        "numero_de_mesa": "1",
+        "productos": [
+            {
+                "nombre": "pita siciliana",
+                "precio": "100",
+                "tipo": "comida" 
+            }
+        ]
+    },
+    "mesa_2" : {
+        "disponibilidad": "ocupada", 
+        "numero_de_mesa": "2",
+        "productos": [
+            {
+                "nombre": "limonada",
+                "precio": "100",
+                "tipo": "bebida" 
+            }
+        ]
+    },
+    "mesa_3" : {
+        "disponibilidad": "disponible", 
+        "numero_de_mesa": "3",
+        "productos": []
+    },
+    "mesa_4" : {
+        "disponibilidad": "ocupada", 
+        "numero_de_mesa": "4",
+        "productos": [
+            {
+                "nombre": "pansserotti",
+                "precio": "100",
+                "tipo": "comida" 
+            }
+        ]
+    },
+    "mesa_5" : {
+        "disponibilidad": "ocupada", 
+        "numero_de_mesa": "5",
+        "productos": [
+            {
+                "nombre": "judo de mora",
+                "precio": "100",
+                "tipo": "bebida" 
+            }
+        ]
+    }
+}
