@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Programa
 {
@@ -92,9 +93,9 @@ namespace Programa
             Console.WriteLine("- Opcion 4: Agregar productos a mesa");    
             Console.WriteLine("- Opcion 5: Generar factura");    
             Console.WriteLine("- Opcion 6: Editar producto de mesa");    
-            Console.WriteLine("-s de mesa");    
-            
-            Console.WriteLine("- Opcion 8: Salir");
+            Console.WriteLine("- Opcion 7: Guardar factura");    
+            Console.WriteLine("- Opcion 8: Cargar factura");                
+            Console.WriteLine("- Opcion 9: Salir");
             Console.WriteLine("------------------------");
             int opcion = int.Parse(Console.ReadLine());
 
@@ -119,8 +120,12 @@ namespace Programa
                     editarProductoMesa(menu , mesas);
                     break;
                 case 7:
+                    guardarFactura(mesas);
                     break;
                 case 8:
+                    cargarFactura(mesas, menu);
+                    break;
+                case 9:
                     ejecucion_mesa = false;
                     break;
                 default:
@@ -348,8 +353,55 @@ namespace Programa
         
     }
 
+    static void guardarFactura(Mesa[] mesas)
+    {
+        Console.WriteLine("BUSCANDO MESA PARA GUARDAR FACTURA");
+        Mesa mesa = buscarMesa(mesas);
+        escribirCSV(mesa);
+    }
 
+    static void cargarFactura(Mesa[] mesas, Producto[] menu)
+    {
+        Console.WriteLine("BUSCANDO MESA PARA CARGAR FACTURA");
+        Mesa mesa = buscarMesa(mesas);
+        if (File.Exists("factura_mesa_"+mesa.Numero+".csv"))
+        {
+            string[][] datos = leerCsv("factura_mesa_"+mesa.Numero+".csv");
+            int numero_productos = datos.GetLength(0);
+            for (int i = 0; i < numero_productos; i++)
+            {
+                    string numero = datos[i][0];
+                    bool encontrado = false;
+                    for (int j = 0; j < menu.Length; j++)
+                    {
+                        if(menu[j].Numero == numero ){
+                        
+                            encontrado = true;
+                            Producto productoEncontrado = menu[j];
+                            mesa.agregarProducto(productoEncontrado);
+                        }
+                    }
+                    if(encontrado == false){
+                        Console.WriteLine("---------- PRODUCTO "+numero+" NO ENCONTRADO---------------" );
+                    }
+            }
+            Console.WriteLine("FACTURA CARGADA" );
+        } else {
+            Console.WriteLine("NO SE ENCONTRO EL ARCHIVO");
+        }
+        
+    }
 
+    static void escribirCSV(Mesa mesa)
+    {
+        if (File.Exists("factura_mesa_"+mesa.Numero+".csv"))
+        {
+            File.Delete("factura_mesa_"+mesa.Numero+".csv");
+        }
+        string[] factura = mesa.facturaCSV();
+        File.WriteAllLines("factura_mesa_"+mesa.Numero+".csv", factura, Encoding.UTF8);
+        Console.WriteLine("Factura cargada - factura_mesa_"+mesa.Numero+".csv");
+    }
     
     }
 }

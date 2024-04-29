@@ -64,5 +64,15 @@ public class Mesa
         Console.WriteLine("------------------------------------------------");
 
     }
+
+    public string[] facturaCSV(){
+        List<string> facturaCSV=new List<string>();
+        int total = 0;
+        foreach (Producto item in Productos)
+        {
+            facturaCSV.Add(item.Numero+","+item.Nombre+","+item.Precio+","+item.Tipo);
+        }
+        return facturaCSV.ToArray();
+    }
 }
 }
