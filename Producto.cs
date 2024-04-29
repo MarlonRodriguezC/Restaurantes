@@ -10,14 +10,16 @@ public class Producto
     public string Nombre { get; set; }
     public string Tipo { get; set; }
     public string Precio { get; set; }
+    public int Cantidad { get; set; }
 
     // Constructor
-    public Producto(string numero, string nombre, string precio, string tipo)
+    public Producto(string numero, string nombre, string precioSTR, string tipo)
     {
         Numero = numero;
         Nombre = nombre;
-        Precio = precio;
+        Precio = precioSTR;
         Tipo   = tipo;
+        Cantidad = 1;
     }
 
     // Method to display product information
@@ -30,7 +32,11 @@ public class Producto
         Console.WriteLine("Precio:"+Precio);
         
         Console.WriteLine("Tipo:"+Tipo);
-        Console.WriteLine("************************************");
+        Console.WriteLine("//////////////////////////////////");
+    }
+      public void informacionFACTURA()
+    {
+        Console.WriteLine(Nombre+"  Cant: "+Cantidad+"  $"+Precio);
     }
 }
 }
